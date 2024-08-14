@@ -55,4 +55,14 @@ class LcuApiService
             return $response->status();
         }
     }
+
+    public function setProfileBackground(int $skinId)
+    {
+        $response = $this->makeRequest('POST', '/lol-summoner/v1/current-summoner/summoner-profile', [
+            'key' => 'backgroundSkinId',
+            'value' => $skinId
+        ]);
+
+        return $response->body();
+    }
 }
