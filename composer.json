@@ -37,13 +37,13 @@
             "@php artisan package:discover --ansi"
         ],
         "post-install-cmd": [
-            "cp resources/icons/hweiIconHD.png ./vendor/nativephp/electron/resources/js/resources/icon.png",
-            "cp resources/icons/hweiIconHD.png ./vendor/nativephp/electron/resources/js/build/icon.png"
+            "cp resources/icons/brushIcon.png ./vendor/nativephp/electron/resources/js/resources/icon.png",
+            "cp resources/icons/brushIcon.png ./vendor/nativephp/electron/resources/js/build/icon.png"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "cp resources/icons/hweiIconHD.png ./vendor/nativephp/electron/resources/js/resources/icon.png",
-            "cp resources/icons/hweiIconHD.png ./vendor/nativephp/electron/resources/js/build/icon.png"
+            "cp resources/icons/brushIcon.png ./vendor/nativephp/electron/resources/js/resources/icon.png",
+            "cp resources/icons/brushIcon.png ./vendor/nativephp/electron/resources/js/build/icon.png"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
