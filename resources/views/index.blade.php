@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
@@ -44,29 +44,37 @@
     </div>
 
     {{-- Background Selector --}}
-    <div class="ml-2 mt-1" x-data="{ openChampion: null }">
-        <div id="championScroller" class="overflow-y-auto pl-2 rounded-md inline-block h-[84vh]">
-            @foreach ($championSkins as $champion => $championSkin)
-                <div class="relative mb-2 w-[18rem]">
-                    <button
-                        @click="openChampion = openChampion === '{{ $champion }}' ? null : '{{ $champion }}'"
-                        class="flex items-center justify-center h-10 w-[17rem] bg-neutral-800 rounded-md border border-neutral-700 shadow-md py-2 px-2">
-                        <span class="text-neutral-100">{{ $champion }}</span>
-                    </button>
-                    <div id="skinWrapper" x-show="openChampion === '{{ $champion }}'" x-transition x-cloak
-                        class="fixed top-[0rem] left-[19rem] max-h-[96.75vh] z-10 mt-2 py-2 mr-2 bg-neutral-800 rounded-xl border border-neutral-700 shadow-md grid grid-cols-4 gap-4 px-4 overflow-y-auto">
-                        @foreach ($championSkin as $skin)
-                            <button @click="fetch('{{ route('set-background', ['skinId' => $skin['skinId']]) }}')"
-                                class="block text-neutral-100 hover:bg-neutral-700 p-3 rounded-2xl">
-                                <img loading="lazy" class="rounded-xl" src="{{ $skin['splashUrl'] }}" />
-                                <span class="ml-1">{{ $skin['name'] }}</span>
+    <div x-data="{ searchQuery: '' }">
+        <input type="text" x-model="searchQuery" placeholder="Search Champion..."
+            class="mb-2 ml-2 p-2 focus:border-neutral-500 focus:ring-inset focus:ring-neutral-500  min-w-[18rem] bg-neutral-800 rounded-md border border-neutral-700 text-neutral-100 placeholder-neutral-500" />
+        <div class="ml-2 mt-1" x-data="{ openChampion: null }">
+            <div id="championScroller" class="overflow-y-auto pl-2 rounded-md inline-block h-[75.75vh]">
+                @foreach ($championSkins as $champion => $championSkin)
+                    <template x-if="'{{ strtolower($champion) }}'.includes(searchQuery.toLowerCase())">
+                        <div class="relative mb-2 w-[18rem]">
+                            <button
+                                @click="openChampion = openChampion === '{{ $champion }}' ? null : '{{ $champion }}'"
+                                class="flex items-center justify-center h-10 w-[17rem] bg-neutral-800 rounded-md border border-neutral-700 shadow-md py-2 px-2">
+                                <span class="text-neutral-100">{{ $champion }}</span>
                             </button>
-                        @endforeach
-                    </div>
-                </div>
-            @endforeach
+                            <div id="skinWrapper" x-show="openChampion === '{{ $champion }}'" x-transition x-cloak
+                                class="fixed top-[0rem] left-[19rem] max-h-[96.75vh] z-10 mt-2 py-2 mr-2 bg-neutral-800 rounded-xl border border-neutral-700 shadow-md grid grid-cols-4 gap-4 px-4 overflow-y-auto">
+                                @foreach ($championSkin as $skin)
+                                    <button
+                                        @click="fetch('{{ route('set-background', ['skinId' => $skin['skinId']]) }}')"
+                                        class="block text-neutral-100 hover:bg-neutral-700 p-3 rounded-2xl">
+                                        <img loading="lazy" class="rounded-xl" src="{{ $skin['splashUrl'] }}" />
+                                        <span class="ml-1">{{ $skin['name'] }}</span>
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+                    </template>
+                @endforeach
+            </div>
         </div>
     </div>
+
 </body>
 
 </html>
