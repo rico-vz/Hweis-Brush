@@ -1,0 +1,171 @@
+@font-face {
+    font-family: "Beaufort";
+    src: url("../fonts/Beaufort.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+#exitPopup {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 530px;
+    padding: 26px 20px 66px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    box-shadow: 0 4px 12px #000 5;
+}
+#exitPopup .decal {
+    position: absolute;
+    z-index: -3;
+    width: 90%;
+    height: calc(100% + 10px);
+    left: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+}
+#exitPopup .decal::before,
+#exitPopup .decal::after {
+    content: "";
+    position: absolute;
+}
+#exitPopup .decal::before {
+    left: 0;
+    top: 0;
+    background: linear-gradient(180deg, #3a2f14, #463714);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 4px;
+}
+#exitPopup .decal::after {
+    background: #010a13;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    left: 50%;
+    top: 2px;
+    transform: translateX(-50%);
+    z-index: 2;
+    border-radius: 4px;
+}
+#exitPopup .title {
+    font-family: "Beaufort", sans-serif;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 30px;
+    color: #f0e6d2;
+    letter-spacing: 2px;
+}
+#exitPopup .desc {
+    color: #928e81;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+#exitPopup::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #463714, #785a28);
+    z-index: -2;
+}
+#exitPopup::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    background: #010a13;
+    z-index: -1;
+}
+#exitPopup .btn-group {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 4px;
+    background: #010a13;
+    padding: 0px 6px;
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+#exitPopup .btn-group::before,
+#exitPopup .btn-group::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    bottom: -5px;
+    background: linear-gradient(180deg, #604a1f, #604a1f);
+}
+#exitPopup .btn-group::before {
+    left: 0;
+    transform: skewY(-30deg);
+}
+#exitPopup .btn-group::after {
+    right: 0;
+    transform: skewY(30deg);
+}
+#exitPopup .btn-group .btn {
+    appearance: unset;
+    border: unset;
+    color: #ccbf91;
+    background: linear-gradient(180deg, #c8aa6d, #bb9239, #785c28);
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 12px 24px 10px;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-family: "Beaufort", sans-serif;
+    transition: color 0.3s ease;
+}
+#exitPopup .btn-group .btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #f0e6d7, #c89c3d);
+    opacity: 0;
+    z-index: -2;
+    transition: opacity 0.3s ease;
+}
+#exitPopup .btn-group .btn::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    background: #1e2329;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    z-index: -1;
+    box-shadow: 0 -8px 8px -8px transparent inset;
+    transition: box-shadow 0.3s ease;
+}
+#exitPopup .btn-group .btn:hover {
+    color: #f0e6d2;
+}
+#exitPopup .btn-group .btn:hover::before {
+    opacity: 1;
+}
+#exitPopup .btn-group .btn:hover::after {
+    box-shadow: 0 -8px 14px -8px #c89c3d b5 inset;
+}
