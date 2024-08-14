@@ -49,7 +49,7 @@
                         @foreach ($championSkin as $skin)
                             <button @click="fetch('{{ route('set-background', ['skinId' => $skin['skinId']]) }}')"
                                 class="block text-neutral-100 hover:bg-neutral-700 p-3 rounded-2xl">
-                                <img class="rounded-xl" src="{{ $skin['splashUrl'] }}" />
+                                <img loading="lazy" class="rounded-xl" src="{{ $skin['splashUrl'] }}" />
                                 <span class="ml-1">{{ $skin['name'] }}</span>
                             </button>
                         @endforeach
