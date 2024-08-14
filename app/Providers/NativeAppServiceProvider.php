@@ -16,7 +16,9 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->resizable(false)
             ->title("Hwei's Brush")
             ->rememberState()
-            ->titleBarHidden();
+            ->maximizable(false)
+            ->hideMenu()
+            ->backgroundColor('#00000050');
     }
 
 
