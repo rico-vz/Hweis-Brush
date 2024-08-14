@@ -18,6 +18,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->rememberState()
             ->maximizable(false)
             ->hideMenu()
+            ->icon(resource_path('icons/hweiIcon.png'))
             ->backgroundColor('#00000050');
     }
 
