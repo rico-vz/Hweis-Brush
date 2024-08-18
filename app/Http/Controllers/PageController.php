@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Services\LeagueClientService;
 use App\Services\LcuApiService;
 use App\Services\CommunityDragonService;
