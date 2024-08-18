@@ -23,19 +23,24 @@ class PageController extends Controller
     public function index()
     {
         $clientStatus = $this->leagueClientService->isClientRunning();
+        $clientInfo   = $this->leagueClientService->getClientInfo();
 
-        if (!$clientStatus) {
+        if (!$clientStatus || !$clientInfo) {
             return view('unavailable');
         }
 
         $summonerInfo = $this->lcuApiService->getSummonerInfo();
         $championSkins = $this->communityDragonService->getChampionSkins();
 
+        if ($summonerInfo['status'] === 'failed' || $championSkins['status'] === 'failed') {
+            return view('unavailable');
+        }
+
         return view(
             'index',
             [
-                'summonerInfo' => $summonerInfo,
-                'championSkins' => $championSkins
+                'summonerInfo' => $summonerInfo['data'],
+                'championSkins' => $championSkins['data']
             ]
         );
     }

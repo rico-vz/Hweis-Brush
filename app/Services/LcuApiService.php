@@ -47,22 +47,73 @@ class LcuApiService
 
     public function getSummonerInfo()
     {
-        $response = $this->makeRequest('GET', '/lol-summoner/v1/current-summoner');
-
-        if ($response->successful()) {
-            return $response->json();
-        } else {
-            return $response->status();
+        try {
+            $response = $this->makeRequest('GET', '/lol-summoner/v1/current-summoner');
+            if ($response->successful()) {
+                return [
+                    'status' => 'success',
+                    'data' => $response->json()
+                ];
+            } else {
+                return [
+                    'status' => 'failed',
+                    'error' => $response->status()
+                ];
+            }
+        } catch (\Exception $e) {
+            return [
+                'status' => 'failed',
+                'error' => $e->getMessage()
+            ];
         }
     }
 
     public function setProfileBackground(int $skinId)
     {
-        $response = $this->makeRequest('POST', '/lol-summoner/v1/current-summoner/summoner-profile', [
-            'key' => 'backgroundSkinId',
-            'value' => $skinId
-        ]);
+        try {
+            $response = $this->makeRequest('POST', '/lol-summoner/v1/current-summoner/summoner-profile', [
+                'key' => 'backgroundSkinId',
+                'value' => $skinId
+            ]);
+            if ($response->successful()) {
+                return [
+                    'status' => 'success',
+                    'data' => $response->body()
+                ];
+            } else {
+                return [
+                    'status' => 'failed',
+                    'error' => $response->status()
+                ];
+            }
+        } catch (\Exception $e) {
+            return [
+                'status' => 'failed',
+                'error' => $e->getMessage()
+            ];
+        }
+    }
 
-        return $response->body();
+    public function getGameVersion()
+    {
+        try {
+            $response = $this->makeRequest('GET', '/lol-gameflow/v1/gameflow-phase');
+            if ($response->successful()) {
+                return [
+                    'status' => 'success',
+                    'data' => $response->json()
+                ];
+            } else {
+                return [
+                    'status' => 'failed',
+                    'error' => $response->status()
+                ];
+            }
+        } catch (\Exception $e) {
+            return [
+                'status' => 'failed',
+                'error' => $e->getMessage()
+            ];
+        }
     }
 }

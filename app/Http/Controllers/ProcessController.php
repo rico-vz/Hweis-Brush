@@ -32,8 +32,9 @@ class ProcessController extends Controller
 
     public function getSummonerInfo(): JsonResponse
     {
-        $summonerInfo = $this->lcuApiService->getSummonerInfo();
-        return response()->json($summonerInfo);
+        $response = $this->lcuApiService->getSummonerInfo();
+        
+        return $response;
     }
 
     public function setBackgroundImage(int $skinId)

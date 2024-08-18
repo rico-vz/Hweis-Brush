@@ -10,26 +10,38 @@ class CommunityDragonService
     public function getChampionSkins()
     {
         return Cache::remember('champion_skins', 60 * 60 * 24, function () {
-            $response = Http::get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json');
-            if (!$response->successful()) {
-                return $response->status();
-            }
-            $skins = $response->json();
-            $championSkins = [];
-            foreach ($skins as $skin) {
-                $championName = $this->extractChampionName($skin['splashPath']);
-                if (strpos($championName, 'Strawberry_') !== false) {
-                    continue;
+            try {
+                $response = Http::get('https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json');
+                if (!$response->successful()) {
+                    return [
+                        'status' => 'failed',
+                        'error' => $response->status()
+                    ];
                 }
-                $championSkins[$championName][] = [
-                    'skinId' => $skin['id'],
-                    'name' => $skin['name'],
-                    'splashUrl' => $this->extractChampionSplashUrl($skin['splashPath'])
+                $skins = $response->json();
+                $championSkins = [];
+                foreach ($skins as $skin) {
+                    $championName = $this->extractChampionName($skin['splashPath']);
+                    if (strpos($championName, 'Strawberry_') !== false) {
+                        continue;
+                    }
+                    $championSkins[$championName][] = [
+                        'skinId' => $skin['id'],
+                        'name' => $skin['name'],
+                        'splashUrl' => $this->extractChampionSplashUrl($skin['splashPath'])
+                    ];
+                }
+                ksort($championSkins);
+                return [
+                    'status' => 'success',
+                    'data' => $championSkins
+                ];
+            } catch (\Exception $e) {
+                return [
+                    'status' => 'failed',
+                    'error' => $e->getMessage()
                 ];
             }
-            ksort($championSkins);
-
-            return $championSkins;
         });
     }
 
