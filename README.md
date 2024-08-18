@@ -15,3 +15,7 @@ Hwei's Brush currently only supports Windows as the current logic to get the LCU
 ### Disclaimer
 
 Hwei's Brush was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+
+---
+
+<a href="https://rico.sh"><img src="https://img.shields.io/badge/%E2%AD%90-rico.sh-white?labelColor=rgb(246, 129, 2)&style=flat" alt="⭐" /></a>
