@@ -25,12 +25,24 @@ class CommunityDragonService
                     if (strpos($championName, 'Strawberry_') !== false) {
                         continue;
                     }
-                    $championSkins[$championName][] = [
-                        'skinId' => $skin['id'],
-                        'name' => $skin['name'],
-                        'splashUrl' => $this->extractChampionSplashUrl($skin['splashPath'])
-                    ];
+                    
+                    if (isset($skin['questSkinInfo']) && !empty($skin['questSkinInfo']['tiers'])) {
+                        foreach ($skin['questSkinInfo']['tiers'] as $tier) {
+                            $championSkins[$championName][] = [
+                                'skinId' => $tier['id'],
+                                'name' => $tier['name'],
+                                'splashUrl' => $this->extractChampionSplashUrl($tier['splashPath'])
+                            ];
+                        }
+                    } else {
+                        $championSkins[$championName][] = [
+                            'skinId' => $skin['id'],
+                            'name' => $skin['name'],
+                            'splashUrl' => $this->extractChampionSplashUrl($skin['splashPath'])
+                        ];
+                    }
                 }
+                
                 ksort($championSkins);
                 return [
                     'status' => 'success',
