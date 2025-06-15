@@ -2,13 +2,17 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "nativephp/electron": "^0.7.0"
+        "nativephp/electron": "^0.9.0",
+        "symfony/console": "7.2.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -52,6 +56,10 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "native:dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan native:serve --no-interaction\" \"npm run dev\" --names=app,vite"
         ]
     },
     "extra": {
