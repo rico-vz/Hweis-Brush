@@ -40,7 +40,7 @@ class LeagueClientService
     protected function extractAuthToken(string $commandLine): ?string
     {
         if (preg_match('/--remoting-auth-token=(\S+)/', $commandLine, $matches)) {
-            return $matches[1];
+            return trim($matches[1], '"');
         }
         return null;
     }
